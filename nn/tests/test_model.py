@@ -3,6 +3,7 @@ import numpy as np
 from nn.activation import ReLU, Sigmoid
 from nn.layer import Dense
 from nn.loss import BinaryCrossEntropy
+from nn.accuracy import BinaryAccuracy
 from nn.optimizer import SGD
 from nn.model import NeuralNetwork
 
@@ -15,8 +16,9 @@ class ModelTest(unittest.TestCase):
             (Dense(units=10), Sigmoid()),
         ]
         loss = BinaryCrossEntropy()
+        accuracy = BinaryAccuracy()
         optimizer = SGD(learning_rate=0.01)
-        self._NeuralNetwork = NeuralNetwork(layers=layers, loss=loss, optimizer=optimizer)
+        self._NeuralNetwork = NeuralNetwork(layers=layers, loss=loss, optimizer=optimizer, accuracy=accuracy)
 
     def test_NeuralNetwork(self):
         _input = np.zeros((784, 16))

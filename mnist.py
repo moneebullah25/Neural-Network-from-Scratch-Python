@@ -3,7 +3,8 @@ from loguru import logger
 
 from nn.activation import ReLU, Sigmoid
 from nn.layer import Dense
-from nn.loss import BinaryCrossEntropy
+from nn.loss import *
+from nn.accuracy import *
 from nn.model import NeuralNetwork
 from nn.optimizer import SGD, Adam, RMSprop
 
@@ -180,12 +181,13 @@ def main():
         ),
         loss=BinaryCrossEntropy(),
         optimizer=Adam(learning_rate=0.01),
+        accuracy=BinaryAccuracy(),
         regularization_factor=2.0,
     )
 
     logger.info("Training model")
 
-    model.fit(x_train, y_train, epochs=20, verbose=True)
+    model.fit(x_train, y_train, epochs=20, batch_size=64, validation_split=0.3, verbose=True)
 
     logger.info("Evaluating trained model")
 

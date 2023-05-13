@@ -12,7 +12,8 @@ from loguru import logger
 
 from nn.activation import ReLU, Linear, Sigmoid
 from nn.layer import Dense
-from nn.loss import MeanSquaredError, BinaryCrossEntropy, MeanAbsoluteError
+from nn.loss import *
+from nn.accuracy import *
 from nn.model import NeuralNetwork
 from nn.optimizer import Adam, SGD, RMSprop
 
@@ -171,6 +172,7 @@ def main():
             (Dense(1), Linear()),
         ),
         loss=MeanAbsoluteError(),
+        accuracy=RegressionAccuracy(),
         optimizer=RMSprop(learning_rate=0.01),
         regularization_factor=0.001,
     )
